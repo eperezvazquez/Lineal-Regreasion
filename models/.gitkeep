@@ -1,0 +1,25 @@
+### modelo regresión lineal
+X = df.drop(['charges'], axis=1)
+y = df['charges']
+# separo en muestras de entrenamiento y test
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# estimo modelo
+regr = linear_model.LinearRegression()
+regr.fit(X_train, y_train)
+# veo los coeficientes
+print('Intercept: \n', regr.intercept_)
+print('Coefficients: \n', regr.coef_)
+X_train
+print('Predicted prima : \n', regr.predict([[edad,sex,bm,children,smoker,region]]))
+### modelo 2 regresión lineal
+x = np.array(df[["age", "sex", "bmi", "smoker"]])
+y = np.array(df["charges"])
+
+xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.2, random_state=42)
+
+forest = RandomForestRegressor()
+forest.fit(xtrain, ytrain)
+
+ypred = forest.predict(xtest)
+df= pd.DataFrame(data={"Predicted Premium Amount": ypred})
+print(df.head())
