@@ -10,18 +10,9 @@ import statsmodels.api as sm
 
 df = pd.read_csv('https://raw.githubusercontent.com/4GeeksAcademy/linear-regression-project-tutorial/main/medical_insurance_cost.csv')
 
-# función para convertir región a numérico
-def conv_region(region_name):
-    if region_name == 'southwest':
-        return 1
-    elif region_name == 'southeast':
-        return 2
-    elif region_name == 'northwest':
-        return 3
-    elif region_name == 'northeast':
-        return 4
-    else:
-        return 'región sin determinar'
+from utils import Helpers
+helpers  = Helpers()
+helpers.conv_region(region_name='region')
     
 df['region'] = df.apply(lambda x: conv_region(x['region']), axis=1)
 
@@ -42,7 +33,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 regr = linear_model.LinearRegression()
 regr.fit(X_train, y_train)
 
- veo los coeficientes
+#veo los coeficientes
 print('Intercept: \n', regr.intercept_)
 print('Coefficients: \n', regr.coef_)
 
